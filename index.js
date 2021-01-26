@@ -27,7 +27,7 @@ xhr.onload = () => {
 xhr.send();
 
 function generateNums() {
-    for(let i = 0; i < mainPos; i++)
+    for(let i = 1; i < mainPos; i++)
     {
         nums.push(i);
     }
