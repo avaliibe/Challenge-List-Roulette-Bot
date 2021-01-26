@@ -2,6 +2,6 @@
 ----
 
 ## How to Add to a Server
-1.) Ensure you have the correct permissions to add a bot to the server.
+1.) Ensure you have the correct permissions to add a bot to the server.\n
 2.) Open [this link](https://discord.com/api/oauth2/authorize?client_id=765578324860600362&permissions=2048&scope=bot).
 3.) 
