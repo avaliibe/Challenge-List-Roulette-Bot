@@ -21,7 +21,6 @@ xhr.responseType = 'json';
 xhr.onload = () => {
     response = JSON.parse(xhr.responseText);
     mainPos = response[0].position;
-    console.log(mainPos);
     generateNums();
 };
 xhr.send();
