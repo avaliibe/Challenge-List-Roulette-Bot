@@ -9,19 +9,38 @@ const client = new discord.Client();
 const config = require('./config.json');
 
 // Other miscellaneous variables
-let response, embed, video, publisher, x;
+let response, embed, video, publisher, x, mainPos;
 let users = [];
 let percentages = [];
 let challenges = [];
 let nums = [];
+let canRespond = false;
 
-for(let i = 0; i <= 50; i++)
-{
-    nums.push(i);
+xhr.open('GET', url + '?name=AbomiNation');
+xhr.responseType = 'json';
+xhr.onload = () => {
+    response = JSON.parse(xhr.responseText);
+    mainPos = response[0].position;
+    console.log(mainPos);
+    generateNums();
+};
+xhr.send();
+
+function generateNums() {
+    for(let i = 0; i < mainPos; i++)
+    {
+        nums.push(i);
+    }
+    canRespond = true;
 }
+
+client.on('ready', () => {
+    client.user.setPresence({activity: { name: "use !help to see commands." }});
+});
 
 // Checks for when a message is send
 client.on('message', msg => {
+    if(canRespond === false) { return; }
     // Converts the contents of the message to lowercase
     let msgLower = msg.content.toLowerCase();
 
@@ -35,12 +54,11 @@ client.on('message', msg => {
 
     // Checks what if whats if the message is a command
     if(msgLower === 'generate') {
-
         // Checks if the user has already started a game
         if(users.includes(msg.author.id)) {
             // Creates and send the embed
             embed = new discord.MessageEmbed()
-                .setTitle('Game already started.')
+                .setTitle('You\'ve already started a game.')
                 .setDescription(`Use ${config.prefix}endgame to end it.`);
             msg.channel.send(embed);
             return;
@@ -50,10 +68,10 @@ client.on('message', msg => {
         // Stuff for API
         xhr.open('GET', url + nums[x] + '/');
         xhr.responseType = 'json';
-        xhr.onload = () => {
+        xhr.onload = () => {                   
             // Makes the response variable the cotents of response from the server
+            console.log(xhr);
             response = JSON.parse(xhr.responseText);
-             
             if(response.data.publisher === undefined) {
                 publisher = 'No publisher found.';
             } else {
@@ -86,8 +104,6 @@ client.on('message', msg => {
                     challenges[i].splice(x, 1);
                 }
             }
-            console.log(challenges);
-            console.log(x);
             percentages.push(1);
             };
             xhr.send();
@@ -168,7 +184,6 @@ client.on('message', msg => {
                         // Replaces the old percentage with the new one
                         percentages.splice(i, i, msgLower);
                         challenges[i].splice(x, 1);
-                        console.log(challenges[i]);
                         
                     } else {
                         embed = new discord.MessageEmbed()
@@ -209,6 +224,7 @@ client.on('message', msg => {
     } else if(msgLower === 'server') {
         embed = new discord.MessageEmbed()
             .setTitle('https://discord.gg/Zp83TZP9VF');
+        msg.channel.send(embed);
     }
 });
 
