@@ -70,7 +70,6 @@ client.on('message', msg => {
         xhr.responseType = 'json';
         xhr.onload = () => {                   
             // Makes the response variable the cotents of response from the server
-            console.log(xhr);
             response = JSON.parse(xhr.responseText);
             if(response.data.publisher === undefined) {
                 publisher = 'No publisher found.';
@@ -161,7 +160,7 @@ client.on('message', msg => {
                                 .setDescription(`Required Percentage: ${percentages[i]}`);
                             msg.channel.send(embed);
                             return;
-                        } else if( msgLower == 100 || challenges[i].length == 0) {
+                        } else if(msgLower == 100 || challenges[i].length == 0) {
                             embed = new discord.MessageEmbed() 
                                 .setTitle('Congratulations! You have won the challenge!')
                             msg.channel.send(embed);
