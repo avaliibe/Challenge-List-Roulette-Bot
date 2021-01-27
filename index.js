@@ -87,7 +87,8 @@ client.on('message', msg => {
                 .addFields(
                     { name: 'By:', value: publisher, inline: true },
                     { name: '_ _', value: '_ _', inline: true },
-                    { name: 'Required Percentage:', value: '1', inline: true }
+                    { name: 'Required Percentage:', value: '1', inline: true },
+                    { name: 'Position:', value: response.data.position, inline: true }
                 );
             msg.channel.send(embed);
             
@@ -176,7 +177,8 @@ client.on('message', msg => {
                         .addFields(
                             { name: 'By:', value: publisher, inline: true },
                             { name: '_ _', value: '_ _', inline: true },
-                            { name: 'Required Percentage:', value: msgLower += 1, inline: true }
+                            { name: 'Required Percentage:', value: msgLower += 1, inline: true },
+                            { name: 'Position:', value: response.data.position, inline: true }
                         );
                         msg.channel.send(embed);
                         // Replaces the old percentage with the new one
