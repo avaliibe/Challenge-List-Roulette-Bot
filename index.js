@@ -57,6 +57,7 @@ client.on('message', msg => {
         if(users.includes(msg.author.id)) {
             // Creates and send the embed
             embed = new discord.MessageEmbed()
+                .setColor('#fc0303')
                 .setTitle('You\'ve already started a game.')
                 .setDescription(`Use ${config.prefix}endgame to end it.`);
             msg.channel.send(embed);
@@ -81,6 +82,7 @@ client.on('message', msg => {
 
             // Makes the embed to be sent back to the user
             embed = new discord.MessageEmbed()
+                .setColor("#ffcfcf")
                 .setTitle(`Level: ${response.data.name}`)
                 .setURL(response.data.video)
                 .setThumbnail(`https://img.youtube.com/vi/${video}/0.jpg`)
@@ -171,6 +173,7 @@ client.on('message', msg => {
                         }
                         // Creates the embed to be sent
                         embed = new discord.MessageEmbed()
+                        .setColor("#ffcfcf")
                         .setTitle(`Level: ${response.data.name}`)
                         .setURL(response.data.video)
                         .setThumbnail(`https://img.youtube.com/vi/${video}/0.jpg`)
@@ -213,6 +216,7 @@ client.on('message', msg => {
         }
     } else if(msgLower === 'help') {
         embed = new discord.MessageEmbed()
+            .setColor('#00c220')
             .setTitle('Commands:')
             .addFields(
                 { name: `${config.prefix}generate`, value: 'Begins a game of the roulette, only works\nif the user has not created a game yet.'},
